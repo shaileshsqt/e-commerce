@@ -11,3 +11,4 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const ADD_CART = "ADD_CART";
 export const REMOVE_CART = "REMOVE_CART";
 export const REMOVE_ONE = "REMOVE_ONE";
+export const GETPRODUCT = "GETPRODUCT";

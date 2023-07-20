@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const MenStore = require("../models/MenStore");
+const { ObjectId } = require("mongodb");
 
 // get Marks
 router.get("/", async (req, res) => {
+  console.log("get all data");
   const getMenProduct = await MenStore.find();
 
   if (!getMenProduct) {
@@ -12,6 +14,41 @@ router.get("/", async (req, res) => {
   res.send(getMenProduct);
 });
 
+router.get("/product", async (req, res) => {
+  console.log("inside single id::", req.query.id);
+  const product = await MenStore.findById({
+    _id: new ObjectId(req.query.id),
+  });
+  if (!product) {
+    return res.status(500).json({
+      success: false,
+      message: "The product with the given ID not exists",
+    });
+  }
+  res.status(200).send(product);
+  // const id = req.params._id;
+
+  // const getSingleProduct = await MenStore.findById({
+  //   _id: new mongodb.ObjectId(req.params.id),
+  // });
+  // console.log("getSingleProduct", getSingleProduct);
+
+  // if (!getSingleProduct) {
+  //   res.status(500).json({ success: false });
+  // }
+  // res.send(getSingleProduct);
+
+  // MenStore.findById(
+  //   { _id: new mongodb.ObjectId(req.params.id) },
+  //   function (err, docs) {
+  //     if (err) {
+  //       console.log(err);
+  //     } else {
+  //       console.log("Result : ", docs);
+  //     }
+  //   }
+  // );
+});
 // Add
 router.post("/AddMenProduct", (req, res) => {
   let data = new MenStore({
@@ -52,7 +89,7 @@ router.post("/AddMenProduct", (req, res) => {
 // Update
 router.put("/Update", async (req, res) => {
   // const id = req.params._id;
-  const id = req.body.id
+  const id = req.body.id;
 
   if (!req.body) {
     return res.status(400).send({

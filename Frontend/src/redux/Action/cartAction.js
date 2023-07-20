@@ -7,8 +7,15 @@ export const ADD = (item) => {
   };
 };
 
+export const GETPRODUCT = (item) => {
+  return {
+    type: types.GETPRODUCT,
+    payload: item
+  }
+}
+
 // remove iteams
-export const DLT = (id) => {
+export const RemoveAll = (id) => {
   return {
     type: types.REMOVE_CART,
     payload: id,

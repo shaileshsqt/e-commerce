@@ -14,7 +14,7 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { BiSolidUserRectangle } from "react-icons/bi";
 import Table from "react-bootstrap/esm/Table";
-import { DLT } from "../../redux/Action/cartAction";
+import { RemoveAll } from "../../redux/Action/cartAction";
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -36,7 +36,7 @@ const Header = () => {
   };
 
   const dlt = (id) => {
-    dispatch(DLT(id));
+    dispatch(RemoveAll(id));
   };
 
   const total = () => {
