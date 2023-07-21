@@ -37,8 +37,10 @@ const Cards = () => {
     // console.log(e);
     dispatch(RemoveAll(e));
   };
-  const Addtocart = (e) => {
-    dispatch(ADD(e));
+  const Addtocart = (item) => {
+    item.qty = 1;
+    console.log("Temp", item);
+    dispatch(ADD(item));
   };
 
   return (

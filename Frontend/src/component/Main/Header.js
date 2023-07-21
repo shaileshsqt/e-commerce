@@ -42,7 +42,7 @@ const Header = () => {
   const total = () => {
     let price = 0;
     getdata.map((ele, k) => {
-      price = ele.price * ele.qnty + price;
+      price = ele.price * ele.qty + price;
     });
     setPrice(price);
   };
@@ -122,12 +122,14 @@ const Header = () => {
                 color: "white",
               }}
             >
-              <BsFillCartFill />
+              <NavLink to={{ pathname: `/cart` }}>
+                <BsFillCartFill />
+              </NavLink>
             </span>
           </Badge>
         </Container>
 
-        <Menu
+        {/* <Menu
           id="basic-menu"
           anchorEl={anchorEl}
           open={open}
@@ -145,7 +147,7 @@ const Header = () => {
                 <thead>
                   <tr>
                     <th>Photo</th>
-                    <th>Restaurant Name</th>
+                    <th>Product Name</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -154,7 +156,11 @@ const Header = () => {
                       <>
                         <tr>
                           <td>
-                            <NavLink to={`/cart/${e.id}`} onClick={handleClose}>
+                            {" "}
+                            <NavLink
+                              to={{ pathname: `/cart/${e._id}` }}
+                              onClick={handleClose}
+                            >
                               <img
                                 src={e.image}
                                 style={{ width: "5rem", height: "5rem" }}
@@ -165,14 +171,14 @@ const Header = () => {
                           <td>
                             <p>{e.title}</p>
                             <p>Price : ₹{e.price}</p>
-                            <p>Quantity : {e.qnty}</p>
+                            <p>Quantity : {e.qty}</p>
                             <p
                               style={{
                                 color: "red",
                                 fontSize: 20,
                                 cursor: "pointer",
                               }}
-                              onClick={() => dlt(e.id)}
+                              onClick={() => dlt(e._id)}
                             >
                               <i className="fas fa-trash smalltrash"></i>
                             </p>
@@ -185,7 +191,7 @@ const Header = () => {
                               fontSize: 20,
                               cursor: "pointer",
                             }}
-                            onClick={() => dlt(e.id)}
+                            onClick={() => dlt(e._id)}
                           >
                             <i className="fas fa-trash largetrash"></i>
                           </td>
@@ -222,7 +228,7 @@ const Header = () => {
               />
             </div>
           )}
-        </Menu>
+        </Menu> */}
       </Navbar>
     </>
   );
