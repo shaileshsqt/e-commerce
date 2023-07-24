@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import { combineReducers } from "redux";
 import AuthReducer from "./Reducer/authReducer";

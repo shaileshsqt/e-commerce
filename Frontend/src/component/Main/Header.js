@@ -10,29 +10,33 @@ import {
 import Badge from "@mui/material/Badge";
 import Menu from "@mui/material/Menu";
 import { BsFillCartFill } from "react-icons/bs";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { BiSolidUserRectangle } from "react-icons/bi";
-import Table from "react-bootstrap/esm/Table";
+
 import { RemoveAll } from "../../redux/Action/cartAction";
 import { Link } from "react-router-dom";
+import { LOGOUT_SUCCESS } from "../../redux/actionTypes";
+import { ToastMessage } from "../../common/ToastMessage";
 
-const Header = () => {
+const Header = ({ isLoggedIn }) => {
   const [price, setPrice] = useState(0);
-  console.log(price);
+  const navigate = useNavigate();
+  // const getdata = useSelector((state) => state.cartreducer.carts);
+  const getdata = useSelector((store) => store.cart.cartsItem);
 
-  const getdata = useSelector((state) => state.cartreducer.carts);
   console.log("getData", getdata);
-
   const dispatch = useDispatch();
-
+  const UserName = localStorage.getItem("username");
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
-    setAnchorEl(null);
+  const logoutHandal = () => {
+    localStorage.clear();
+    dispatch({ type: LOGOUT_SUCCESS, payload: "item" });
+    navigate("/");
   };
 
   const dlt = (id) => {
@@ -49,7 +53,7 @@ const Header = () => {
 
   useEffect(() => {
     total();
-  }, [total]);
+  }, [total, isLoggedIn]);
 
   return (
     <>
@@ -61,33 +65,49 @@ const Header = () => {
         className="bg-body-tertiary"
       >
         <Container fluid>
-          <Navbar.Brand as={Link} to="/">
+          <Navbar.Brand as={Link} to="/Dashboard">
             ApNa BaZaR
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: "100px" }}
-              navbarScroll
-            >
-              <Nav.Link
-                as={Link}
-                to="/"
-                id="page"
-                className="text-decoration-none text-light"
-              >
-                Man
-              </Nav.Link>
-              <Nav.Link
-                as={Link}
-                to="/"
-                id="page"
-                className="text-decoration-none text-light"
-              >
-                Women
-              </Nav.Link>
-            </Nav>
+            {isLoggedIn === false && (
+              <>
+                <Nav.Link as={Link} to="/" id="page">
+                  Login
+                </Nav.Link>
+                <Nav.Link as={Link} to="/Signup" id="page">
+                  Register
+                </Nav.Link>
+              </>
+            )}
+
+            {isLoggedIn && (
+              <>
+                <Nav
+                  className="me-auto my-2 my-lg-0"
+                  style={{ maxHeight: "100px" }}
+                  navbarScroll
+                >
+                  <Nav.Link
+                    as={Link}
+                    to="/Dashboard"
+                    id="page"
+                    className="text-decoration-none text-light"
+                  >
+                    Man
+                  </Nav.Link>
+                  <Nav.Link
+                    as={Link}
+                    to="/Dashboard"
+                    id="page"
+                    className="text-decoration-none text-light"
+                  >
+                    Women
+                  </Nav.Link>
+                </Nav>
+              </>
+            )}
+
             {/* <Form className="d-flex mx-5">
               <Form.Control
                 type="search"
@@ -99,10 +119,12 @@ const Header = () => {
             </Form> */}
           </Navbar.Collapse>
           <NavDropdown
-            title={"Welcome" + " " + "Login_User.Name"}
+            title={"Welcome" + " " + UserName}
             className="text-decoration-none text-light"
           >
-            <NavDropdown.Item>Logout</NavDropdown.Item>
+            <NavDropdown.Item onClick={() => logoutHandal()}>
+              Logout
+            </NavDropdown.Item>
             <NavDropdown.Item>Edit Profile</NavDropdown.Item>
           </NavDropdown>
 

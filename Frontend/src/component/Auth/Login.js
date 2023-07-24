@@ -7,7 +7,7 @@ import { FaUserCircle, FaUser, FaLock } from "react-icons/fa";
 import { GrFacebook } from "react-icons/gr";
 import { AiFillTwitterSquare, AiFillGoogleSquare } from "react-icons/ai";
 import { ApiCall } from "../../common/ApiCall";
-import { ToastMessage } from "../../common/ToastMessage";
+import { ToastMessage, ErrorMessage } from "../../common/ToastMessage";
 import { LoginAction } from "../../redux/Action/authAction";
 import { useDispatch, useSelector } from "react-redux";
 import { colors } from "@mui/material";
@@ -74,9 +74,10 @@ const Login = () => {
         localStorage.setItem("isLogin", true);
         localStorage.setItem("username", response.data.firstName);
         dispatch({ type: types.LOGIN_SUCCESS, payload: response });
-        navigate("/");
-      } else {
-        setErrMsg(true);
+        navigate("/Dashboard");
+      } else if (response.status_code == 0) {
+        console.log("response.message", response.message);
+        ErrorMessage(response.message);
       }
     }
   };

@@ -13,9 +13,9 @@ function App() {
       {/* <Header /> */}
       <Routes>
         <Route element={<Register />} path="/Signup" />
-        <Route element={<Login />} path="/login" />
+        <Route element={<Login />} path="/" />
         <Route path="/Header" element={<Header />} />
-        <Route path="/" element={<Cards />} />
+        <Route path="/Dashboard" element={<Cards />} />
         <Route path="/ProductDetail/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<Checkout />} />
       </Routes>

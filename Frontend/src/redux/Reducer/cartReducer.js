@@ -42,7 +42,7 @@ export const cartreducer = (state = initialState, action) => {
     // }
     case types.INCREMENT:
       console.log("inside increment::", action.payload);
-
+      debugger;
       let ADD = state.carts.map((item) => {
         if (item?._id === action.payload._id) {
           item.qty++;

@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import Cardsdata from "./CardsData";
+// import Cardsdata from "./CardsData";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
-
-import { ADD, GETPRODUCT, RemoveAll } from "../../redux/Action/cartAction";
+import { addItem, removeItem } from "../../toolkit/cartSlice";
+// import { ADD, GETPRODUCT, RemoveAll } from "../../redux/Action/cartAction";
 import { Link, NavLink, useParams } from "react-router-dom";
 import Header from "../Main/Header";
 import { ApiCall } from "../../common/ApiCall";
 
 const Cards = () => {
+  debugger;
   const [data, setData] = useState([]);
-  const getCardData = useSelector((state) => state?.cartreducer?.carts);
+  const isLoggedIn = localStorage.getItem("isLogin");
+  // const getCardData = useSelector((state) => state.cart.carts);
+  const getCardData = useSelector((store) => store.cart.cartsItem);
   const [cartBtn, setCartBtn] = useState("Add to Cart");
   let param = useParams();
   // console.log(data);
@@ -21,31 +24,33 @@ const Cards = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
+  console.log("Get Data", getCardData);
   const fetchData = async () => {
     let response = await ApiCall({
       method: "GET",
       url: `http://localhost:4001/Men/`,
     });
     setData(response);
-    if (getCardData.lenght > 0 && getCardData.find((s) => s._id === data._id)) {
+    if (getCardData.length > 0 && getCardData.find((s) => s._id === data._id)) {
       setCartBtn("View to Cart");
     }
   };
 
   const sendProduct = (e) => {
     // console.log(e);
-    dispatch(RemoveAll(e));
+    dispatch(removeItem(e));
   };
   const Addtocart = (item) => {
-    item.qty = 1;
-    console.log("Temp", item);
-    dispatch(ADD(item));
+    // item.qty = 1;
+    // console.log("Temp", item);
+    // dispatch(ADD(item));
+    // dispatch(addItem(item));
+    dispatch(addItem({ ...item, qty: 1 }));
   };
 
   return (
     <>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} />
       <div className="container mt-3">
         <h2 className="text-center">Add to Cart Projects</h2>
 

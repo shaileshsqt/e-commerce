@@ -2,20 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { CgTrash } from "react-icons/cg";
 import { ApiCall } from "../../common/ApiCall";
+
 // import { DLT, ADD, REMOVE } from "../redux/actions/action";
 import { RemoveAll, ADD, REMOVE } from "../../redux/Action/cartAction";
+import { clearCart, addItem, removeItem } from "../../toolkit/cartSlice";
 import Header from "../Main/Header";
 
 const ProductDetail = () => {
+  const isLoggedIn = localStorage.getItem("isLogin");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   let param = useParams();
-
   console.log("param ::", param);
   const getdata = useSelector((state) => state?.cartreducer?.getProduct);
-  const getCardData = useSelector((state) => state?.cartreducer?.carts);
+  // const getCardData = useSelector((state) => state?.cartreducer?.carts);
+  const getCardData = useSelector((store) => store?.cart?.cartsItem);
   const [data, setData] = useState(null);
 
   const fetchData = async () => {
@@ -43,13 +46,15 @@ const ProductDetail = () => {
 
   // add data
 
-  const AddCart = (e) => {
-    console.log("e", e);
-    dispatch(ADD(e));
+  const AddCart = (item) => {
+    // console.log("e", e);
+    dispatch(addItem({ ...item, qty: 1 }));
+    // dispatch(ADD(e));
   };
 
-  const dlt = (id) => {
-    dispatch(RemoveAll(id));
+  const RemoveAll = (id) => {
+    dispatch(removeItem(id));
+    // navigate("/Dashboard");
   };
 
   // remove one
@@ -63,7 +68,7 @@ const ProductDetail = () => {
   console.log("Data log", data);
   return (
     <>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} />
       <div className="container mt-2">
         <h2 className="text-center">Product Details Page</h2>
 
@@ -111,7 +116,7 @@ const ProductDetail = () => {
                           <Button
                             variant="primary"
                             onClick={(e) => {
-                              dlt(data?._id);
+                              RemoveAll(data?._id);
                             }}
                             className="col-lg-12"
                           >
@@ -176,15 +181,18 @@ const ProductDetail = () => {
                       <p>
                         <strong>Remove :</strong>{" "}
                         <span>
-                          <i
-                            className="fas fa-trash"
-                            onClick={() => dlt(data?.id)}
+                          <span
                             style={{
                               color: "red",
-                              fontSize: 20,
+                              fontSize: 30,
                               cursor: "pointer",
                             }}
-                          ></i>{" "}
+                          >
+                            <CgTrash
+                              // className="fas fa-trash"
+                              onClick={() => RemoveAll(data?._id)}
+                            />
+                          </span>
                         </span>
                       </p>
                     </td>

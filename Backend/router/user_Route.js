@@ -62,9 +62,9 @@ router.post("/register", (req, res) => {
     .save()
     .then((result) => {
       if (!result) {
-         return res
-           .status(200)
-           .send({ message: "user creation error", status_code: 0 });
+        return res
+          .status(200)
+          .send({ message: "user creation error", status_code: 0 });
       } else {
         return res.status(200).send({
           message: "User Created Successfully",
@@ -72,7 +72,6 @@ router.post("/register", (req, res) => {
           status_code: 1,
         });
       }
-      
     })
     .catch((error) => {
       res.status(500).send({
@@ -101,7 +100,7 @@ router.post("/login", async (req, res) => {
       status_code: 1,
     });
   } else {
-    res.status(400).send({ message: "Password is mismatch", status_code: 0 });
+    res.status(200).send({ message: "Password is mismatch", status_code: 0 });
   }
   //   return res
   //     .status(200)

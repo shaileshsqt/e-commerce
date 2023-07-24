@@ -2,88 +2,72 @@ import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { INCREMENT, DECREMENT } from "../../redux/actionTypes";
-import { RemoveAll, ADD, REMOVE } from "../../redux/Action/cartAction";
+// import { INCREMENT, DECREMENT } from "../../redux/actionTypes";
+// import { RemoveAll, ADD, REMOVE } from "../../redux/Action/cartAction";
 import { CgTrash } from "react-icons/cg";
 import { AiOutlineClose } from "react-icons/ai";
 import Header from "../Main/Header";
-import { INCREMENT_ITEM, DECREMENT_ITEM } from "../../redux/Action/cartAction";
+// import { INCREMENT_ITEM, DECREMENT_ITEM } from "../../redux/Action/cartAction";
+import { incrementQty, decrementQty, clearCart } from "../../toolkit/cartSlice";
 
 const Checkout = () => {
   const [data, setData] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const getdata = useSelector((state) => {
-    return state.cartreducer.carts;
+  const isLoggedIn = localStorage.getItem("isLogin");
+  // const getdata = useSelector((state) => state.cartreducer.carts);
+  const getdata = useSelector((store) => {
+    return store.cart.cartsItem;
   });
-  console.log("get data in cardDetail", getdata);
 
-  // const compare = () => {
-  //   let comparedata = getdata.filter((e) => {
-  //     return e._id == id;
-  //   });
-  //   setData(comparedata);
-  //   console.log("Compare DAta", comparedata);
-  // };
+  const Increment_btn = (ele) => {
+    dispatch(incrementQty(ele));
+  };
 
-  // add data
-
-  const send = (item) => {
-    // console.log(e);
-    // item.qty = 1;
-
-    console.log("increment btn", item);
-    // dispatch({ type: INCREMENT, payload: item });
-    // dispatch(INCREMENT_ITEM(item));
-    // dispatch(ADD(e));
+  const Decrement_btn = (ele) => {
+    dispatch(decrementQty(ele));
   };
 
   const ClearCart = (id) => {
-    dispatch(RemoveAll(id));
-    navigate("/");
+    dispatch(clearCart());
+    navigate("/Dashboard");
   };
 
-  // remove one
-  const remove = (item) => {
-    dispatch(DECREMENT_ITEM(item));
-    // dispatch({ type: DECREMENT, payload: item });
-  };
-
-  // useEffect(() => {
-  //   compare();
-  // }, [id]);
+  useEffect(() => {}, [dispatch]);
 
   return (
     <>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} />
       <div className="container mt-2">
         <h2 className="text-center">Iteams Details Page</h2>
 
         <section className="container mt-3">
           <div className="iteamsdetails">
             {getdata.length > 0 ? (
-              getdata.map((ele) => {
+              getdata?.map((ele) => {
+                console.log("LLLP DATA:::", ele);
                 return (
                   <>
                     <div className="items_img">
                       <img src={ele.image} alt="" />
                     </div>
-
                     <div className="details">
                       <Table>
                         <tr>
+                          <h2>{ele?.title}</h2>
+                        </tr>
+                        <tr>
                           <td>
                             <p>
-                              <strong>Category</strong> : {ele.category}
+                              <strong>Category</strong> : {ele?.category}
                             </p>
                             <p>
-                              <strong>Price</strong> : ₹{ele.price}
+                              <strong>Price</strong> : ₹ {ele?.price}
                             </p>
 
                             <p>
-                              <strong>Total</strong> :₹ {ele.price * ele.qty}
+                              <strong>Total</strong> :₹ {ele?.price * ele?.qty}
                             </p>
                             <div
                               className="mt-5 d-flex justify-content-between align-items-center"
@@ -100,7 +84,7 @@ const Checkout = () => {
                                 onClick={
                                   ele.qty <= 1
                                     ? () => ClearCart(ele._id)
-                                    : () => dispatch(DECREMENT_ITEM(ele))
+                                    : (e) => Decrement_btn(ele._id)
                                 }
                               >
                                 -
@@ -118,7 +102,7 @@ const Checkout = () => {
                               <span style={{ fontSize: 22 }}>{ele?.qty}</span>
                               <span
                                 style={{ fontSize: 24 }}
-                                onClick={(e) => dispatch(INCREMENT_ITEM(ele))}
+                                onClick={(e) => Increment_btn(ele._id)}
                               >
                                 +
                               </span>
@@ -168,7 +152,7 @@ const Checkout = () => {
               >
                 <AiOutlineClose
                   className="fas fa-close smallclose"
-                  onClick={() => navigate("/")}
+                  onClick={() => navigate("/Dashboard")}
                   style={{
                     position: "absolute",
                     top: 2,
