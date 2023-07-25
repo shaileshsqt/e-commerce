@@ -1,0 +1,58 @@
+.heroSecHeading {
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  height: 42px;
+  padding-top: 10px;
+  background-color: #d53f8c;
+  background-size: 1rem 1rem;
+  color: white;
+  animation: 1s linear 0s infinite normal none running herotextAnimation;
+}
+.Banner1 {
+  border-radius: 20px;
+  margin-top: 40px;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.Category-title {
+  width: 220px;
+  font-size: 200%;
+  margin-top: 40px;
+
+  border-bottom-style: solid;
+  border-bottom-width: 5px;
+  border-bottom-color: rgb(248, 159, 23);
+}
+.Herohead {
+  text-align: center;
+}
+.navbar {
+  position: sticky;
+  /* display: flex; */
+  flex-wrap: wrap;
+  background: rgb(247, 248, 247);
+  z-index: 100;
+  box-shadow: rgba(170, 159, 170, 0.2) 0px 7px 7px -5px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+}
+
+@keyframes herotextAnimation {
+  0% {
+    background-position: 1rem 0px;
+  }
+
+  100% {
+    background-position: 0px 0px;
+  }
+}

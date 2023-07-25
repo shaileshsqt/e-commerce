@@ -6,6 +6,7 @@ import Login from "./component/Auth/Login";
 import Register from "./component/Auth/Register";
 import Checkout from "./component/Cart/Checkout";
 import ProductDetail from "./component/Cart/ProductDetail";
+import "./assets/styles/Home.css";
 
 function App() {
   return (

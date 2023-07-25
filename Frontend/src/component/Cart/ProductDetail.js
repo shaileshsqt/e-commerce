@@ -204,6 +204,8 @@ const ProductDetail = () => {
             })} */}
           </div>
         </section>
+
+      
       </div>
     </>
   );

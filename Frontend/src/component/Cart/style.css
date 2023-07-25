@@ -6,9 +6,24 @@
 .smalltrash {
   display: none;
 }
-
+.add-to-cart-btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: #ff8800;
+  color: #f3f3f3;
+  font-size: 18px;
+  text-align: center;
+  transition: all 0.3s ease;
+  transform: translateY(100%);
+}
 .card_style:hover {
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.082);
+}
+.add-to-cart-btn:hover {
+  transform: translateY(0);
 }
 
 .iteamsdetails {
@@ -34,6 +49,31 @@
 .rating {
   background-color: green;
 }
+
+.Thead {
+  background-color: #55555555;
+  color: white;
+  justify-content: space-between;
+}
+.tbody {
+  justify-content: center;
+  color: rgb(46, 43, 43);
+}
+
+/* .product-card {
+  position: relative;
+  margin: 20px;
+  background-color: #fff;
+  overflow: hidden;
+  width: 100%;
+  text-align: left;
+  height: 520px;
+} */
+/* .css-tgusc6 {
+  display: flex;
+  gap: 5px;
+  text-align: center;
+} */
 
 @media (max-width: 772px) {
   .iteamsdetails {

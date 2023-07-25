@@ -12,5 +12,20 @@ code {
     monospace;
 }
 .nav-link {
-  color: #fff !important;
+  color: #000000 !important;
 }
+.nav-link:hover {
+  color: rgb(187, 40, 17) !important;
+}
+
+/* .navbar {
+  position: sticky !important;
+  display: flex;
+  flex-wrap: wrap;
+  background: rgb(247, 248, 247);
+  z-index: 100;
+  box-shadow: rgba(170, 159, 170, 0.2) 0px 7px 7px -5px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+} */

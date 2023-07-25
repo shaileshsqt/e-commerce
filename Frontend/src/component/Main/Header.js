@@ -18,6 +18,7 @@ import { RemoveAll } from "../../redux/Action/cartAction";
 import { Link } from "react-router-dom";
 import { LOGOUT_SUCCESS } from "../../redux/actionTypes";
 import { ToastMessage } from "../../common/ToastMessage";
+import { rgbToHex } from "@mui/material";
 
 const Header = ({ isLoggedIn }) => {
   const [price, setPrice] = useState(0);
@@ -58,14 +59,16 @@ const Header = ({ isLoggedIn }) => {
   return (
     <>
       <Navbar
-        bg="primary"
+        className="navbar bg-body-tertiary"
+        bg="light"
+        sticky="top"
+        // data-bs-theme="dark"
         variant="dark"
-        style={{ height: "60px" }}
+        // style={{ height: "60px", backgroundColor: "gray" }}
         expand="lg"
-        className="bg-body-tertiary"
       >
         <Container fluid>
-          <Navbar.Brand as={Link} to="/Dashboard">
+          <Navbar.Brand as={Link} to="/Dashboard" style={{ color: "black" }}>
             ApNa BaZaR
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
@@ -92,7 +95,7 @@ const Header = ({ isLoggedIn }) => {
                     as={Link}
                     to="/Dashboard"
                     id="page"
-                    className="text-decoration-none text-light"
+                    // className="text-decoration-none text-light"
                   >
                     Man
                   </Nav.Link>
@@ -100,7 +103,7 @@ const Header = ({ isLoggedIn }) => {
                     as={Link}
                     to="/Dashboard"
                     id="page"
-                    className="text-decoration-none text-light"
+                    // className="text-decoration-none text-light"
                   >
                     Women
                   </Nav.Link>
@@ -120,7 +123,7 @@ const Header = ({ isLoggedIn }) => {
           </Navbar.Collapse>
           <NavDropdown
             title={"Welcome" + " " + UserName}
-            className="text-decoration-none text-light"
+            // className="text-decoration-none text-light"
           >
             <NavDropdown.Item onClick={() => logoutHandal()}>
               Logout
