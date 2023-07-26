@@ -24,7 +24,7 @@ const ProductDetail = () => {
   const fetchData = async () => {
     let response = await ApiCall({
       method: "GET",
-      url: `http://localhost:4001/Men/product?id=${param.id}`,
+      url: `http://localhost:4001/${param.type}/product?id=${param.id}`,
     });
     console.log("fetch param data", response);
     // if (response.length > 0) {
@@ -204,8 +204,6 @@ const ProductDetail = () => {
             })} */}
           </div>
         </section>
-
-      
       </div>
     </>
   );

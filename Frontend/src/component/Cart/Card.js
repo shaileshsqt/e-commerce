@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Carousel, Button, Card, Image } from "react-bootstrap";
-// import Cardsdata from "./CardsData";
+import Footer from "../Main/Footer";
 import "../../assets/styles/Home.css";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,16 +17,17 @@ import {
   slide4,
   Banner1,
   Mansban,
+  WomensBaner
 } from "../../assets/image";
 
 const Cards = () => {
-  debugger;
   const [data, setData] = useState([]);
   const isLoggedIn = localStorage.getItem("isLogin");
   // const getCardData = useSelector((state) => state.cart.carts);
   const getCardData = useSelector((store) => store.cart.cartsItem);
   const [cartBtn, setCartBtn] = useState("Add to Cart");
   let param = useParams();
+  let saved = 0;
   // console.log(data);
 
   const dispatch = useDispatch();
@@ -94,69 +95,56 @@ const Cards = () => {
             <Image src={Mansban} alt="Mansbaneer" className="Banner1"></Image>
           </div>
         </div>
+        {/* Men's Category */}
+        <div className="row">
+          <div className="col-4">
+            <Link to={{ pathname: "/Man" }}>
+              <img src="https://i.ibb.co/47Sk9QL/product-1.jpg" alt="" />
+              <h4>Printed Shirt</h4>
+            </Link>
+          </div>
+          <div className="col-4">
+            <img src="https://i.ibb.co/b7ZVzYr/product-2.jpg" alt="" />
+            <h4>Shoes</h4>
+          </div>
+          <div className="col-4 ">
+            <img src="https://i.ibb.co/QfCgdXZ/product-8.jpg" alt="" />
+            <h4>Watches</h4>
+          </div>
+        </div>
 
-        <div className="row d-flex justify-content-center align-items-center">
-          {data?.map((element, id) => {
-            console.log("element::", element);
-            // const ItemIndex =
-            //   getCardData.lenght > 0 &&
-            //   getCardData.findIndex((item) => item._id === element._id);
-            // console.log("ITEMINDEX", ItemIndex);
-            return (
-              <>
-                <Card
-                  style={{ width: "22rem", border: "none" }}
-                  className=" mx-2 mt-4 card_style my-5 product-card"
-                >
-                  <Link
-                    // onClick={(e) => {
-                    //   sendProduct(element);
-                    // }}
-                    to={{ pathname: "/ProductDetail/" + element._id }}
-                  >
-                    <Card.Img
-                      variant="top"
-                      src={element.image}
-                      style={{ height: "18rem" }}
-                      className="mt-3 pe-auto rounded"
-                    />
-                  </Link>
-
-                  <Card.Body>
-                    <Card.Title>{element.title}</Card.Title>
-                    <Card.Text>Price : ₹ {element.price}</Card.Text>
-                    {/* <div className="add-to-cart-btn"> */}
-                    <div className=" button_div d-flex justify-content-center ">
-                      {getCardData?.findIndex((d) => d._id === element._id) >=
-                      0 ? (
-                        <Button
-                          // variant="primary"
-                          onClick={(e) => {
-                            sendProduct(element._id);
-                          }}
-                          className="col-lg-12"
-                        >
-                          Remove to cart
-                        </Button>
-                      ) : (
-                        <Button
-                          // variant="primary"
-                          onClick={(e) => {
-                            Addtocart(element);
-                          }}
-                          className="col-lg-12"
-                        >
-                          Add to cart
-                        </Button>
-                      )}
-                    </div>
-                  </Card.Body>
-                </Card>
-              </>
-            );
-          })}
+        <div>
+          <div>
+            <h3 className="Category-title">Women's Store</h3>
+          </div>
+          <div>
+            <Image
+              src={WomensBaner}
+              alt="WomensBaner"
+              className="Banner1"
+            ></Image>
+          </div>
+        </div>
+        {/* Men's Category */}
+        <div className="row">
+          <div className="col-4">
+            <Link to={{ pathname: "/Man" }}>
+              <img src="https://i.ibb.co/47Sk9QL/product-1.jpg" alt="" />
+              <h4>Printed Shirt</h4>
+            </Link>
+          </div>
+          <div className="col-4">
+            <img src="https://i.ibb.co/b7ZVzYr/product-2.jpg" alt="" />
+            <h4>Shoes</h4>
+          </div>
+          <div className="col-4 ">
+            <img src="https://i.ibb.co/QfCgdXZ/product-8.jpg" alt="" />
+            <h4>Watches</h4>
+          </div>
         </div>
       </div>
+
+      <Footer />
     </>
   );
 };

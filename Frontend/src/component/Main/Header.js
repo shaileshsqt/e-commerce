@@ -93,7 +93,7 @@ const Header = ({ isLoggedIn }) => {
                 >
                   <Nav.Link
                     as={Link}
-                    to="/Dashboard"
+                    to="/Man"
                     id="page"
                     // className="text-decoration-none text-light"
                   >
@@ -101,7 +101,7 @@ const Header = ({ isLoggedIn }) => {
                   </Nav.Link>
                   <Nav.Link
                     as={Link}
-                    to="/Dashboard"
+                    to="/Women"
                     id="page"
                     // className="text-decoration-none text-light"
                   >

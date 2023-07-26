@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const MenStore = mongoose.Schema({
+const WomenStore = mongoose.Schema({
   title: { type: String },
   image: { type: String },
   img1: { type: String },
@@ -8,9 +8,9 @@ const MenStore = mongoose.Schema({
   img3: { type: String },
   img4: { type: String },
   price: { type: Number },
-  Actual_Price: { type: Number },
+  actualPrice: { type: Number },
   category: { type: String },
   id: { type: Number },
 });
 
-module.exports = mongoose.model("MenStore", MenStore);
+module.exports = mongoose.model("WomenStore", WomenStore);

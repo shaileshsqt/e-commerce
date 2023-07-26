@@ -7,6 +7,9 @@ import Register from "./component/Auth/Register";
 import Checkout from "./component/Cart/Checkout";
 import ProductDetail from "./component/Cart/ProductDetail";
 import "./assets/styles/Home.css";
+import Theme from "./Theme/Theme";
+import Man from "./pages/Man";
+import Women from "./pages/Women";
 
 function App() {
   return (
@@ -17,8 +20,11 @@ function App() {
         <Route element={<Login />} path="/" />
         <Route path="/Header" element={<Header />} />
         <Route path="/Dashboard" element={<Cards />} />
-        <Route path="/ProductDetail/:id" element={<ProductDetail />} />
+        <Route path="/ProductDetail/:type/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<Checkout />} />
+        <Route path="/Theme" element={<Theme />} />
+        <Route path="/Man" element={<Man />} />
+        <Route path="/Women" element={<Women />} />
       </Routes>
     </>
   );

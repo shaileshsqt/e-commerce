@@ -26,28 +26,6 @@ router.get("/product", async (req, res) => {
     });
   }
   res.status(200).send(product);
-  // const id = req.params._id;
-
-  // const getSingleProduct = await MenStore.findById({
-  //   _id: new mongodb.ObjectId(req.params.id),
-  // });
-  // console.log("getSingleProduct", getSingleProduct);
-
-  // if (!getSingleProduct) {
-  //   res.status(500).json({ success: false });
-  // }
-  // res.send(getSingleProduct);
-
-  // MenStore.findById(
-  //   { _id: new mongodb.ObjectId(req.params.id) },
-  //   function (err, docs) {
-  //     if (err) {
-  //       console.log(err);
-  //     } else {
-  //       console.log("Result : ", docs);
-  //     }
-  //   }
-  // );
 });
 // Add
 router.post("/AddMenProduct", (req, res) => {
@@ -80,6 +58,59 @@ router.post("/AddMenProduct", (req, res) => {
     .catch((error) => {
       res.status(500).send({
         message: "Error creating MenStore",
+        error,
+        status_code: 0,
+      });
+    });
+});
+
+//Get Women Product
+router.get("/", async (req, res) => {
+  console.log("inside single id::", req.query.id);
+  const product = await MenStore.findById({
+    _id: new ObjectId(req.query.id),
+  });
+  if (!product) {
+    return res.status(500).json({
+      success: false,
+      message: "The product with the given ID not exists",
+    });
+  }
+  res.status(200).send(product);
+});
+
+//Add Women Product
+router.post("/AddWomenProduct", (req, res) => {
+  let data = new MenStore({
+    title: req.body.title,
+    image: req.body.image,
+    img1: req.body.img1,
+    img2: req.body.img2,
+    img3: req.body.img3,
+    img4: req.body.img4,
+    price: req.body.price,
+    Actual_Price: req.body.Actual_Price,
+    category: req.body.category,
+    id: req.body.id,
+  });
+  data
+    .save()
+    .then((result) => {
+      if (!result) {
+        return res
+          .status(400)
+          .send({ message: "Women Product creation error", status_code: 0 });
+      } else {
+        return res.status(200).send({
+          message: "Women Created Successfully",
+          data: result,
+          status_code: 1,
+        });
+      }
+    })
+    .catch((error) => {
+      res.status(500).send({
+        message: "Error creating Women",
         error,
         status_code: 0,
       });
