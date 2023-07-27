@@ -79,7 +79,7 @@ p {
   transition: background 0.5s;
 }
 
-.btn:hover {
+.btn1:hover {
   background: #563434;
 }
 
@@ -122,7 +122,7 @@ p {
 
 .col-4 img {
   /* width: 95%; */
-   width: 20rem;
+  width: 20rem;
   border-radius: 5px;
 }
 
@@ -544,12 +544,12 @@ form input {
   border: 1px solid #ccc;
 }
 
-form .btn {
+/* form .btn {
   width: 100%;
   border: none;
   cursor: pointer;
   margin: 10px 0;
-}
+} */
 
 form .btn:focus {
   outline: none;
